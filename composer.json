@@ -1,0 +1,38 @@
+{
+    "name": "aureja/job-queue-service-provider",
+    "homepage":     "https://github.com/Aureja/JobQueueServiceProvider",
+    "description":  "Aureja job queue service provider.",
+    "keywords":     ["job queue", "job queue service provider"],
+    "type":         "library",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "aureja/job-queue": "dev-master",
+        "pimple/pimple": ">=2.1,<4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8",
+        "symfony/process": "~2.3|~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aureja\\Provider\\JobQueue\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aureja\\Provider\\JobQueue\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
