@@ -81,6 +81,31 @@ class JobQueueServiceProviderTest extends TestCase
     }
 
     /**
+     * @expectedException \Aureja\Provider\JobQueue\Exception\ServiceNotFoundException
+     * @expectedExceptionMessage Not found service "aureja_job_queue.manager.configuration".
+     */
+    public function testJobConfigurationManagerNonExistService()
+    {
+        $container = new Container();
+        $container->register(new JobQueueServiceProvider());
+    }
+
+    /**
+     * @expectedException \Aureja\Provider\JobQueue\Exception\ServiceNotFoundException
+     * @expectedExceptionMessage Not found service "aureja_job_queue.manager.report".
+     */
+    public function testJobReportManagerNonExistService()
+    {
+        $container = new Container();
+
+        $container['aureja_job_queue.manager.configuration'] = function () use ($container) {
+            return $this->getMock(JobConfigurationManagerInterface::class);
+        };
+
+        $container->register(new JobQueueServiceProvider());
+    }
+
+    /**
      * @return Container
      */
     private function createMockDefaultApp()

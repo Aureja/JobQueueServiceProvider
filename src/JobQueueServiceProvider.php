@@ -18,6 +18,7 @@ use Aureja\JobQueue\JobQueue;
 use Aureja\JobQueue\JobRestoreManager;
 use Aureja\JobQueue\Provider\JobProvider;
 use Aureja\JobQueue\Register\JobFactoryRegistry;
+use Aureja\Provider\JobQueue\Exception\ServiceNotFoundException;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -33,6 +34,14 @@ class JobQueueServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
+        if (false === isset($container['aureja_job_queue.manager.configuration'])) {
+            throw ServiceNotFoundException::create('aureja_job_queue.manager.configuration');
+        }
+
+        if (false === isset($container['aureja_job_queue.manager.report'])) {
+            throw ServiceNotFoundException::create('aureja_job_queue.manager.report');
+        }
+
         foreach ($this->getJobQueueDefaults() as $key => $value) {
             if (false === isset($container[$key])) {
                 $container[$key] = $value;
